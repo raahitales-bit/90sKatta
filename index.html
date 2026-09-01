@@ -322,37 +322,34 @@ const MENU_DATA = [
     title: "Pizza & Pasta",
     icon: "pizza",
     items: [
-      { name:"Margherita Pizza", desc:"", price:99 / 119, veg:true },
-      { name:"Farmhouse Pizza", desc:"", price:129 / 150, veg:true },
-      { name:"Corn Cheese Pizza", desc:"", price:119 / 129, veg:true },
-      { name:"Peri Peri Paneer Pizza", desc:"", price:139 / 159, veg:true },
-      { name:"BBQ Paneer Pizza", desc:"", price:139 / 159, veg:true },
-      { name:"Chicken Tikka Pizza", price:139 / 159, veg:false },
-      { name:"Chicken Peri Peri Pizza", price:139 / 159, veg:false },
-      { name:"BBQ Chicken Pizza", price:149 / 159, veg:false },
-      { name:"Spicy Chicken Pizza", price:149 / 169, veg:false },
-      { name:"Loaded Chicken Pizza", price:149 / 169, veg:false },
+      { name:"Margherita Pizza", desc:"", price: " 99 | 119", veg:true },
+      { name:"Farmhouse Pizza", desc:"", price:" 129 | 150", veg:true },
+      { name:"Corn Cheese Pizza", desc:"", price:" 119 | 129", veg:true },
+      { name:"Peri Peri Paneer Pizza", desc:"", price:" 139 | 159", veg:true },
+      { name:"BBQ Paneer Pizza", desc:"", price:" 139 | 159", veg:true },
+      { name:"Chicken Tikka Pizza", price:" 139 | 159", veg:false },
+      { name:"Chicken Peri Peri Pizza", price:" 139  | 159", veg:false },
+      { name:"BBQ Chicken Pizza", price:" 149 | 159", veg:false },
+      { name:"Spicy Chicken Pizza", price:" 149  | 169", veg:false },
+      { name:"Loaded Chicken Pizza", price:" 149 | 169", veg:false },
 
-      { name:"Alfredo White Sauce Pasta", price:139, veg:true },
-      { name:"Alfredo White Sauce Pasta", price:159, veg:false },
-      { name:"Pink Sauce Pasta", price:149, veg:true },
-      { name:"Pink Sauce Pasta", price:169, veg:false },
-      { name:"Mac & Cheese", price:149, veg:true },
-      { name:"Mac & Cheese", price:169, veg:false },
-    ]
+      { name:"White Sauce Pasta", price:" 139 | 159", veg:true },
+      { name:"Pink Sauce Pasta", price:" 149 | 169", veg:true },
+      { name:"Mac & Cheese", price:"149 | 169", veg:true },
+      ]
   },
   {
     title: "Sandwiches & Burgers",
     icon: "cricket",
     items: [
       { name:"Classic Sandwich", price:119, veg:true },
-      { name:"Bombay Sandwich", desc:"Classic veggie, extra chutney", price:129, veg:true },
+      { name:"Bombay Sandwich", desc:"", price:129, veg:true },
       { name:"Grilled Paneer Sandwich", price:139, veg:true },
       { name:"Double Decker Sandwich", price:130, veg:true },
       { name:"Omlette Sandwich", price:119, veg:false },
       { name:"Grill Chicken Sandwich", price:119, veg:false },
       { name:"Spicy Chicken Sandwich", price:139, veg:false },
-      { name:"Double Decker Chicken Sandwich", price:159, veg:false },
+      { name:"Double Decker Sandwich", price:159, veg:false },
 { name:"Veg Classic Burger", price:99, veg:true },
 { name:"Veg BBQ Paneer Burger", price:109, veg:true },
 { name:"Veg Crispy Panner Burger", price:119, veg:true },
@@ -361,8 +358,6 @@ const MENU_DATA = [
 { name:"Chicken Burger", price:119, veg:false },
 { name:"BBQ Chicken Burger", price:119, veg:false },
 { name:"Chicken Monster Burger", price:139, veg:false },
-    ]
-
     ]
   },
   {
@@ -376,17 +371,7 @@ const MENU_DATA = [
       { name:"Chocolate Shake", price:40, veg:true },
     ]
   },
-  {
-    title: "90s Candy & Chocolates",
-    icon: "chocolate",
-    items: [
-      { name:"Kulfi Stick", desc:"Malai or pista", price:40, veg:true },
-      { name:"Milk Chocolate Slab", price:50, veg:true },
-      { name:"Crispy Wafer Chocolate", price:40, veg:true },
-      { name:"Choco Brownie Sundae", price:120, veg:true },
-    ]
-  },
-];
+  ];
 
 const ICONS = {
   cassette:`<svg viewBox="0 0 48 48" fill="none"><rect x="4" y="10" width="40" height="28" rx="4" fill="#E8A33D"/><circle cx="16" cy="24" r="6" fill="#0D0904"/><circle cx="32" cy="24" r="6" fill="#0D0904"/><circle cx="16" cy="24" r="2" fill="#E8A33D"/><circle cx="32" cy="24" r="2" fill="#E8A33D"/><rect x="14" y="30" width="20" height="4" fill="#0D0904"/></svg>`,
