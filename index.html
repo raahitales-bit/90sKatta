@@ -484,7 +484,7 @@ document.getElementById('qr-download').addEventListener('click', ()=>{
   const canvas = qrHolder.querySelector('canvas');
   if(!canvas) return;
   const link = document.createElement('a');
-  link.download = '90's-katta-table-qr.png';
+  link.download = '90s-katta-table-qr.png';
   link.href = canvas.toDataURL('image/png');
   link.click();
 });
