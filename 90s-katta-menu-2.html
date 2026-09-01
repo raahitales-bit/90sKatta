@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90's Katta — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Bebas+Neue&family=Sacramento&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-dark:#150E08;
+    --bg-panel:#251A0F;
+    --amber:#E8A33D;
+    --amber-light:#F5C97B;
+    --ember:#C1502E;
+    --cream:#F3E4C8;
+    --ink:#0D0904;
+    --line: rgba(232,163,61,0.28);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg-dark);
+    color:var(--cream);
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  .display{font-family:'Playfair Display',serif; font-style:italic; font-weight:700;}
+  .condensed{font-family:'Bebas Neue',cursive; letter-spacing:1px;}
+  .script{font-family:'Sacramento',cursive;}
+
+  body::after{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:60; opacity:0.5;
+    background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size:3px 3px;
+  }
+
+  /* ================= INTRO ================= */
+  #intro{
+    position:fixed; inset:0; z-index:100; background:radial-gradient(ellipse at 50% 40%, #2b1c0e 0%, var(--ink) 75%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden;
+  }
+  #intro.hide{ animation: iris-out 0.6s ease-in forwards; pointer-events:none; }
+  @keyframes iris-out{
+    0%{clip-path:circle(150% at 50% 50%); opacity:1;}
+    100%{clip-path:circle(0% at 50% 50%); opacity:1;}
+  }
+
+  .lights{ position:absolute; inset:0; z-index:1; }
+  .lights span{
+    position:absolute; width:6px; height:6px; border-radius:50%; background:var(--amber-light);
+    box-shadow:0 0 10px 3px rgba(245,201,123,0.7);
+    animation: twinkle 2.4s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:0.25; transform:scale(0.8);}
+    50%{opacity:1; transform:scale(1.15);}
+  }
+
+  .badge-wrap{
+    position:relative; z-index:5; opacity:0; text-align:center;
+    animation: badge-stamp 0.55s cubic-bezier(.2,1.3,.4,1) 0.4s forwards;
+  }
+  @keyframes badge-stamp{
+    0%{opacity:0; transform:scale(1.7);}
+    70%{opacity:1; transform:scale(0.94);}
+    100%{opacity:1; transform:scale(1);}
+  }
+  .badge-wrap svg{ width:min(58vw,230px); height:min(58vw,230px); }
+
+  .intro-tagline{
+    position:relative; z-index:5; margin-top:6px; font-size:1.5rem; color:var(--amber-light);
+    opacity:0; animation: tag-in 0.5s ease 1.15s forwards;
+  }
+  @keyframes tag-in{ to{opacity:0.95;} }
+
+  #skip-intro{
+    position:absolute; top:18px; right:18px; z-index:10;
+    background:rgba(0,0,0,0.3); border:1.5px solid var(--line);
+    color:var(--cream); font-family:'Poppins',sans-serif; font-size:0.75rem;
+    padding:7px 14px; border-radius:20px; cursor:pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .lights span{animation:none; opacity:0.7;}
+    .badge-wrap,.intro-tagline{animation:none; opacity:1; transform:none;}
+  }
+
+  /* ================= MENU ================= */
+  #menu{ max-width:660px; margin:0 auto; padding:0 0 60px; }
+
+  header.hero{ position:relative; padding:34px 20px 20px; text-align:center; overflow:hidden; }
+  header.hero .lights{ opacity:0.6; }
+  .hero-badge svg{ width:150px; height:150px; }
+  .hero-sub{ margin-top:2px; font-size:0.95rem; color:var(--amber-light); }
+
+  .banner{
+    margin:20px auto 0; max-width:400px; background:var(--amber);
+    color:var(--ink); font-family:'Bebas Neue',cursive; letter-spacing:1px;
+    font-size:1.1rem; text-align:center; padding:16px 10px 20px;
+    transform:rotate(-1.4deg);
+    clip-path:polygon(0% 18%,7% 2%,14% 16%,21% 3%,28% 15%,35% 2%,42% 16%,49% 3%,56% 15%,63% 2%,70% 16%,77% 3%,84% 15%,91% 2%,100% 16%,100% 82%,93% 99%,86% 84%,79% 98%,72% 85%,65% 99%,58% 84%,51% 98%,44% 85%,37% 99%,30% 84%,23% 98%,16% 85%,9% 99%,2% 84%,0% 82%);
+  }
+
+  .features{
+    display:flex; justify-content:space-between; gap:4px; padding:26px 18px 6px;
+  }
+  .feature{ flex:1; text-align:center; }
+  .feature svg{ width:30px; height:30px; color:var(--amber); }
+  .feature-label{
+    margin-top:8px; font-family:'Bebas Neue',cursive; letter-spacing:0.5px;
+    font-size:0.68rem; color:var(--amber-light); line-height:1.2;
+  }
+  .feature-div{ width:1px; background:var(--line); margin:4px 0; }
+
+  .mood{
+    margin:26px 18px 0; background:var(--bg-panel); border:1.5px solid var(--line);
+    border-radius:8px; padding:14px 18px; text-align:center;
+  }
+  .mood .script{ font-size:1.5rem; color:var(--amber-light); line-height:1.2; }
+
+  nav.catnav{
+    display:flex; gap:8px; overflow-x:auto; padding:22px 16px 14px; -webkit-overflow-scrolling:touch;
+  }
+  nav.catnav::-webkit-scrollbar{display:none;}
+  nav.catnav a{
+    flex:0 0 auto; text-decoration:none; color:var(--amber-light);
+    background:var(--bg-panel); border:1.5px solid var(--line); border-radius:20px;
+    padding:6px 14px; font-size:0.78rem; font-weight:600; white-space:nowrap;
+  }
+
+  .cat-grid{ column-count:1; column-gap:0; padding:0 16px; }
+  @media (min-width:560px){ .cat-grid{ column-count:2; column-gap:18px; } }
+
+  section.category{
+    break-inside:avoid; margin-bottom:22px; background:var(--bg-panel);
+    border:1.5px solid var(--line); border-radius:10px; padding:16px 16px 8px;
+  }
+  .cat-head{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .cat-icon{
+    width:38px; height:38px; flex:0 0 38px; border-radius:50%;
+    background:var(--ink); border:2px solid var(--amber);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cat-icon svg{ width:22px; height:22px; }
+  .cat-title{ font-family:'Bebas Neue',cursive; letter-spacing:0.5px; font-size:1.15rem; color:var(--amber-light); }
+
+  .item{ padding:9px 0; border-bottom:1px dashed var(--line); }
+  .item:last-child{ border-bottom:none; }
+  .item-top{ display:flex; align-items:baseline; }
+  .item-name-row{ display:flex; align-items:center; gap:6px; flex:0 0 auto; }
+  .veg-dot{
+    width:11px; height:11px; border:1.5px solid #37b25c; border-radius:2px;
+    display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;
+  }
+  .veg-dot::after{content:""; width:5px; height:5px; border-radius:50%; background:#37b25c;}
+  .veg-dot.nonveg{border-color:#d9584a;}
+  .veg-dot.nonveg::after{background:#d9584a; border-radius:50%;}
+  .item-name{ font-weight:600; font-size:0.92rem; white-space:nowrap; color:var(--cream); }
+  .leader{ flex:1; border-bottom:2px dotted var(--line); margin:0 6px; min-width:16px; position:relative; top:-3px; }
+  .item-price{ font-family:'Bebas Neue',cursive; letter-spacing:0.5px; font-size:1rem; white-space:nowrap; color:var(--amber); }
+  .item-desc{ font-size:0.76rem; color:#a6957a; margin-top:2px; }
+
+  footer.menu-footer{ text-align:center; padding:24px 20px 6px; }
+  footer.menu-footer .rule{ border-top:1.5px solid var(--line); max-width:220px; margin:0 auto 14px; }
+  footer.menu-footer .script{ display:block; font-size:1.6rem; color:var(--amber-light); margin-bottom:4px; }
+  footer.menu-footer .fine{ font-size:0.76rem; color:#a6957a; }
+
+  #qr-toggle{
+    display:block; margin:22px auto 0; background:var(--amber); color:var(--ink);
+    border:none; border-radius:24px; padding:10px 22px;
+    font-family:'Poppins',sans-serif; font-weight:700; font-size:0.85rem; cursor:pointer;
+  }
+
+  /* ================= QR MODAL ================= */
+  #qr-modal{
+    position:fixed; inset:0; background:rgba(13,9,4,0.8);
+    display:none; align-items:center; justify-content:center; z-index:200; padding:20px;
+  }
+  #qr-modal.open{display:flex;}
+  .qr-card{
+    background:var(--bg-panel); border-radius:14px; padding:26px 22px; max-width:340px; width:100%;
+    border:1.5px solid var(--line); text-align:center; position:relative;
+  }
+  .qr-card h3{ font-family:'Bebas Neue',cursive; letter-spacing:0.5px; color:var(--amber-light); font-size:1.15rem; margin:0 0 6px; }
+  .qr-card p{ font-size:0.8rem; color:#a6957a; margin:0 0 16px; line-height:1.5; }
+  .qr-card input{
+    width:100%; padding:9px 12px; border:1.5px solid var(--line); border-radius:8px; background:var(--ink);
+    color:var(--cream); font-family:'Poppins',sans-serif; font-size:0.8rem; margin-bottom:10px;
+  }
+  #qr-canvas-holder{ display:flex; align-items:center; justify-content:center; min-height:180px; margin-bottom:14px; background:var(--cream); border-radius:8px; }
+  .qr-actions{ display:flex; gap:8px; }
+  .qr-actions button{
+    flex:1; padding:9px 0; border-radius:8px; font-family:'Poppins',sans-serif; font-weight:600;
+    font-size:0.78rem; cursor:pointer; border:none;
+  }
+  #qr-generate{ background:var(--ember); color:#fff; }
+  #qr-download{ background:var(--amber); color:var(--ink); }
+  #qr-close{ position:absolute; top:10px; right:12px; background:none; border:none; font-size:1.1rem; cursor:pointer; color:var(--cream); }
+</style>
+</head>
+<body>
+
+<!-- ============ INTRO ============ -->
+<div id="intro">
+  <button id="skip-intro" aria-label="Skip intro">Skip ▸</button>
+  <div class="lights" id="intro-lights"></div>
+  <div class="badge-wrap" id="intro-badge"></div>
+  <div class="intro-tagline script">the good old days, served fresh</div>
+</div>
+
+<!-- ============ MENU ============ -->
+<div id="menu">
+  <header class="hero">
+    <div class="lights" id="hero-lights"></div>
+    <div class="hero-badge" id="hero-badge" style="position:relative;"></div>
+    <div class="hero-sub">The 90's feeling, over chai</div>
+
+    <div class="banner display">where every bite feels like the 90's</div>
+
+    <div class="features">
+      <div class="feature"><span id="feat-1"></span><div class="feature-label">RETRO<br>VIBES</div></div>
+      <div class="feature-div"></div>
+      <div class="feature"><span id="feat-2"></span><div class="feature-label">HOMESTYLE<br>FOOD</div></div>
+      <div class="feature-div"></div>
+      <div class="feature"><span id="feat-3"></span><div class="feature-label">90'S HITS<br>ALL DAY</div></div>
+      <div class="feature-div"></div>
+      <div class="feature"><span id="feat-4"></span><div class="feature-label">SELFIE<br>READY</div></div>
+    </div>
+
+    <div class="mood">
+      <div class="script">good food · good mood · 90's vibes</div>
+    </div>
+  </header>
+
+  <nav class="catnav" id="catnav"></nav>
+  <div class="cat-grid" id="categories"></div>
+
+  <footer class="menu-footer">
+    <div class="rule"></div>
+    <span class="script">thanks for stopping by</span>
+    <div class="fine">Prices in ₹ · inclusive of taxes · ask staff about today's special</div>
+  </footer>
+
+  <button id="qr-toggle">📎 Get QR code for this menu</button>
+</div>
+
+<!-- ============ QR MODAL ============ -->
+<div id="qr-modal">
+  <div class="qr-card">
+    <button id="qr-close" aria-label="Close">✕</button>
+    <h3>Table QR Code</h3>
+    <p>Once this page is live at its real web address, paste that link below and regenerate — this is what you print for the tables.</p>
+    <input id="qr-url" type="text" value="">
+    <div id="qr-canvas-holder"></div>
+    <div class="qr-actions">
+      <button id="qr-generate">Regenerate</button>
+      <button id="qr-download">Download PNG</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* =========================================================
+   EDIT YOUR MENU HERE — everything below drives the page.
+   Each category: { title, icon key, items:[...] }
+   icon keys: phone, cassette, cricket, glass, kulfi, controller,
+              chocolate, pizza, fries, pasta, boombox, clapper, coffeecup, camera
+   Each item: { name, desc (optional), price, veg: true|false }
+   ========================================================= */
+const MENU_DATA = [
+  {
+    title: "Chai & Coffee",
+    icon: "coffeecup",
+    items: [
+      { name:"Cutting Chai", desc:"Strong, milky, in the small glass", price:20, veg:true },
+      { name:"Masala Chai", price:30, veg:true },
+      { name:"Cold Coffee", desc:"With ice cream", price:80, veg:true },
+      { name:"Filter Coffee", price:40, veg:true },
+    ]
+  },
+  {
+    title: "Maggi & Munchies",
+    icon: "cassette",
+    items: [
+      { name:"Masala Maggi", price:60, veg:true },
+      { name:"Cheese Maggi", price:80, veg:true },
+      { name:"Veg Cheese Toast", price:70, veg:true },
+      { name:"Chicken Cheese Toast", price:100, veg:false },
+    ]
+  },
+  {
+    title: "Fries & Sides",
+    icon: "fries",
+    items: [
+      { name:"Classic Salted Fries", price:70, veg:true },
+      { name:"Peri Peri Fries", price:90, veg:true },
+      { name:"Cheese Loaded Fries", price:110, veg:true },
+      { name:"Corn Cheese Balls", price:100, veg:true },
+    ]
+  },
+  {
+    title: "Pizza & Pasta",
+    icon: "pizza",
+    items: [
+      { name:"Margherita Pizza", desc:"Classic cheese and tomato", price:150, veg:true },
+      { name:"Farmhouse Pizza", desc:"Loaded with veggies", price:180, veg:true },
+      { name:"Chicken Tikka Pizza", price:220, veg:false },
+      { name:"White Sauce Pasta", price:140, veg:true },
+      { name:"Red Sauce Pasta", price:130, veg:true },
+    ]
+  },
+  {
+    title: "Sandwiches & Burgers",
+    icon: "cricket",
+    items: [
+      { name:"Bombay Sandwich", desc:"Classic veggie, extra chutney", price:70, veg:true },
+      { name:"Grilled Paneer Sandwich", price:90, veg:true },
+      { name:"Classic Cheese Burger", price:130, veg:true },
+      { name:"Chicken Tikka Sandwich", price:120, veg:false },
+    ]
+  },
+  {
+    title: "Shakes & Coolers",
+    icon: "glass",
+    items: [
+      { name:"Rose Milk", price:50, veg:true },
+      { name:"Chocolate Shake", price:90, veg:true },
+      { name:"Oreo Shake", price:100, veg:true },
+      { name:"Nimbu Soda", price:40, veg:true },
+    ]
+  },
+  {
+    title: "90s Candy & Chocolates",
+    icon: "chocolate",
+    items: [
+      { name:"Kulfi Stick", desc:"Malai or pista", price:40, veg:true },
+      { name:"Milk Chocolate Slab", price:50, veg:true },
+      { name:"Crispy Wafer Chocolate", price:40, veg:true },
+      { name:"Choco Brownie Sundae", price:120, veg:true },
+    ]
+  },
+];
+
+const ICONS = {
+  cassette:`<svg viewBox="0 0 48 48" fill="none"><rect x="4" y="10" width="40" height="28" rx="4" fill="#E8A33D"/><circle cx="16" cy="24" r="6" fill="#0D0904"/><circle cx="32" cy="24" r="6" fill="#0D0904"/><circle cx="16" cy="24" r="2" fill="#E8A33D"/><circle cx="32" cy="24" r="2" fill="#E8A33D"/><rect x="14" y="30" width="20" height="4" fill="#0D0904"/></svg>`,
+  phone:`<svg viewBox="0 0 48 48" fill="none"><rect x="9" y="4" width="30" height="40" rx="6" fill="#E8A33D"/><circle cx="24" cy="16" r="8" fill="#0D0904"/><rect x="14" y="28" width="20" height="10" rx="2" fill="#0D0904"/></svg>`,
+  cricket:`<svg viewBox="0 0 48 48" fill="none"><rect x="20" y="6" width="8" height="24" rx="3" fill="#E8A33D"/><circle cx="24" cy="38" r="7" fill="#E8A33D"/><circle cx="24" cy="38" r="3" fill="#0D0904"/></svg>`,
+  glass:`<svg viewBox="0 0 48 48" fill="none"><path d="M14 8h20l-3 32a3 3 0 0 1-3 3H20a3 3 0 0 1-3-3L14 8z" fill="#E8A33D"/><rect x="18" y="14" width="12" height="4" fill="#0D0904"/><line x1="30" y1="6" x2="36" y2="0" stroke="#E8A33D" stroke-width="3" stroke-linecap="round"/></svg>`,
+  kulfi:`<svg viewBox="0 0 48 48" fill="none"><path d="M18 6h12v18l-6 18-6-18V6z" fill="#E8A33D"/><rect x="22" y="24" width="4" height="16" fill="#0D0904"/></svg>`,
+  controller:`<svg viewBox="0 0 48 48" fill="none"><path d="M10 18h28a8 8 0 0 1 8 8v6a6 6 0 0 1-11 3.5l-3-3.5H16l-3 3.5A6 6 0 0 1 2 32v-6a8 8 0 0 1 8-8z" fill="#E8A33D"/><rect x="14" y="24" width="8" height="2.5" fill="#0D0904"/><rect x="17" y="21" width="2.5" height="8" fill="#0D0904"/><circle cx="34" cy="23" r="2.2" fill="#0D0904"/><circle cx="39" cy="27" r="2.2" fill="#0D0904"/></svg>`,
+  chocolate:`<svg viewBox="0 0 48 48" fill="none"><path d="M8 10l8-6h16l8 6v28a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V10z" fill="#E8A33D"/><line x1="8" y1="20" x2="40" y2="20" stroke="#0D0904" stroke-width="2"/><line x1="8" y1="29" x2="40" y2="29" stroke="#0D0904" stroke-width="2"/><line x1="18.6" y1="10" x2="18.6" y2="38" stroke="#0D0904" stroke-width="2"/><line x1="29.3" y1="10" x2="29.3" y2="38" stroke="#0D0904" stroke-width="2"/></svg>`,
+  pizza:`<svg viewBox="0 0 48 48" fill="none"><path d="M24 6 L44 40 A28 28 0 0 1 4 40 Z" fill="#E8A33D"/><circle cx="20" cy="26" r="2.4" fill="#0D0904"/><circle cx="28" cy="30" r="2.4" fill="#0D0904"/><circle cx="24" cy="20" r="2.4" fill="#0D0904"/><path d="M6 38a26 26 0 0 0 36 0" stroke="#0D0904" stroke-width="3" fill="none"/></svg>`,
+  fries:`<svg viewBox="0 0 48 48" fill="none"><path d="M12 20h24l-3 20a3 3 0 0 1-3 3H18a3 3 0 0 1-3-3l-3-20z" fill="#E8A33D"/><rect x="12" y="6" width="6" height="20" rx="1" fill="#0D0904"/><rect x="21" y="2" width="6" height="24" rx="1" fill="#0D0904"/><rect x="30" y="8" width="6" height="18" rx="1" fill="#0D0904"/></svg>`,
+  pasta:`<svg viewBox="0 0 48 48" fill="none"><path d="M6 22h36a18 16 0 0 1-36 0z" fill="#E8A33D"/><path d="M12 22c2-6 3-10 1-16M20 22c2-7 1-11-1-16M28 22c1-7 3-10 5-15M36 22c1-6-1-10-3-15" stroke="#0D0904" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg>`,
+  boombox:`<svg viewBox="0 0 48 48" fill="none"><rect x="4" y="14" width="40" height="26" rx="4" fill="#E8A33D"/><circle cx="16" cy="27" r="7" fill="#0D0904"/><circle cx="32" cy="27" r="7" fill="#0D0904"/><circle cx="16" cy="27" r="2.5" fill="#E8A33D"/><circle cx="32" cy="27" r="2.5" fill="#E8A33D"/><rect x="18" y="6" width="12" height="8" rx="2" fill="#E8A33D"/></svg>`,
+  clapper:`<svg viewBox="0 0 48 48" fill="currentColor"><rect x="6" y="16" width="36" height="26" rx="2"/><path d="M6 16l4-8h6l-4 8zM18 16l4-8h6l-4 8zM30 16l4-8h6l-4 8z"/></svg>`,
+  coffeecup:`<svg viewBox="0 0 48 48" fill="currentColor"><path d="M10 18h22v14a8 8 0 0 1-8 8H18a8 8 0 0 1-8-8V18z"/><path d="M32 22h4a5 5 0 0 1 0 10h-4" stroke="currentColor" stroke-width="3" fill="none"/><path d="M16 10c0-2 2-2 2-4M22 10c0-2 2-2 2-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  camera:`<svg viewBox="0 0 48 48" fill="currentColor"><rect x="4" y="14" width="40" height="26" rx="4"/><rect x="16" y="6" width="16" height="8" rx="2"/><circle cx="24" cy="27" r="9" fill="#150E08"/><circle cx="24" cy="27" r="5" fill="currentColor"/></svg>`,
+};
+
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-'); }
+
+/* ---------------- Vintage badge logo (SVG, reused for intro + header) ---------------- */
+function badgeSVG(){
+  return `
+  <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="110" cy="110" r="104" fill="#1c1309" stroke="#E8A33D" stroke-width="2"/>
+    <circle cx="110" cy="110" r="92" fill="none" stroke="#E8A33D" stroke-width="1"/>
+    <path id="topArc" d="M 26 118 A 84 84 0 0 1 194 118" fill="none"/>
+    <path id="botArc" d="M 190 128 A 78 78 0 0 1 30 128" fill="none"/>
+    <text font-family="Playfair Display, serif" font-weight="700" font-style="italic" font-size="27" fill="#F5C97B" text-anchor="middle">
+      <textPath href="#topArc" startOffset="50%">90's Katta</textPath>
+    </text>
+    <text font-family="Bebas Neue, cursive" font-size="12" letter-spacing="3" fill="#E8A33D" text-anchor="middle">
+      <textPath href="#botArc" startOffset="50%">THE 90'S FEELING · OVER CHAI</textPath>
+    </text>
+    <g transform="translate(110,112)">
+      <path d="M-18 -6h36v22a13 13 0 0 1-13 13h-10a13 13 0 0 1-13-13v-22z" fill="#E8A33D"/>
+      <path d="M18 -1h6a8 8 0 0 1 0 16h-6" stroke="#E8A33D" stroke-width="4" fill="none"/>
+      <path d="M-9 -12c0-3 3-3 3-7M2 -12c0-3 3-3 3-7" stroke="#E8A33D" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>`;
+}
+document.getElementById('intro-badge').innerHTML = badgeSVG();
+document.getElementById('hero-badge').innerHTML = badgeSVG();
+
+function renderLights(containerId, count){
+  const wrap = document.getElementById(containerId);
+  for(let i=0;i<count;i++){
+    const s = document.createElement('span');
+    s.style.left = (Math.random()*100)+'%';
+    s.style.top = (Math.random()*70)+'%';
+    s.style.animationDelay = (Math.random()*2.4)+'s';
+    wrap.appendChild(s);
+  }
+}
+renderLights('intro-lights', 22);
+renderLights('hero-lights', 14);
+
+document.getElementById('feat-1').innerHTML = ICONS.clapper;
+document.getElementById('feat-2').innerHTML = ICONS.coffeecup;
+document.getElementById('feat-3').innerHTML = ICONS.boombox;
+document.getElementById('feat-4').innerHTML = ICONS.camera;
+
+function renderMenu(){
+  const catNav = document.getElementById('catnav');
+  const catWrap = document.getElementById('categories');
+  MENU_DATA.forEach((cat) => {
+    const id = slug(cat.title);
+
+    const navLink = document.createElement('a');
+    navLink.href = '#' + id;
+    navLink.textContent = cat.title;
+    catNav.appendChild(navLink);
+
+    const section = document.createElement('section');
+    section.className = 'category';
+    section.id = id;
+
+    const head = document.createElement('div');
+    head.className = 'cat-head';
+    head.innerHTML = `
+      <div class="cat-icon">${ICONS[cat.icon] || ''}</div>
+      <div class="cat-title">${cat.title}</div>`;
+    section.appendChild(head);
+
+    cat.items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'item';
+      row.innerHTML = `
+        <div class="item-top">
+          <span class="item-name-row">
+            <span class="veg-dot ${item.veg ? '' : 'nonveg'}"></span>
+            <span class="item-name">${item.name}</span>
+          </span>
+          <span class="leader"></span>
+          <span class="item-price">₹${item.price}</span>
+        </div>
+        ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ''}`;
+      section.appendChild(row);
+    });
+
+    catWrap.appendChild(section);
+  });
+}
+renderMenu();
+
+/* ---------------- Intro timing ---------------- */
+const intro = document.getElementById('intro');
+function endIntro(){
+  if(intro.classList.contains('hide')) return;
+  intro.classList.add('hide');
+  setTimeout(()=>{ intro.style.display='none'; }, 650);
+}
+const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(endIntro, prefersReduced ? 0 : 3000);
+document.getElementById('skip-intro').addEventListener('click', endIntro);
+
+/* ---------------- QR modal ---------------- */
+const qrModal = document.getElementById('qr-modal');
+const qrUrlInput = document.getElementById('qr-url');
+const qrHolder = document.getElementById('qr-canvas-holder');
+qrUrlInput.value = window.location.href;
+
+function generateQR(){
+  qrHolder.innerHTML = '';
+  new QRCode(qrHolder, {
+    text: qrUrlInput.value || window.location.href,
+    width: 180, height: 180,
+    colorDark: "#150E08", colorLight: "#F3E4C8"
+  });
+}
+document.getElementById('qr-toggle').addEventListener('click', ()=>{
+  qrModal.classList.add('open');
+  generateQR();
+});
+document.getElementById('qr-close').addEventListener('click', ()=> qrModal.classList.remove('open'));
+document.getElementById('qr-generate').addEventListener('click', generateQR);
+document.getElementById('qr-download').addEventListener('click', ()=>{
+  const canvas = qrHolder.querySelector('canvas');
+  if(!canvas) return;
+  const link = document.createElement('a');
+  link.download = '90s-katta-table-qr.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+</script>
+</body>
+</html>
